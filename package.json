@@ -1,0 +1,35 @@
+{
+  "name": "dispatching",
+  "version": "0.0.0",
+  "description": "Tiny routing / dispatch library for node and the browser.",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "mocha",
+    "watch": "mocha --watch",
+    "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha",
+    "lint": "./node_modules/.bin/jshint ./lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codemix/dispatching.git"
+  },
+  "keywords": [
+    "routing",
+    "dispatch",
+    "dispatching",
+    "router"
+  ],
+  "author": "Charles Pick <charles@codemix.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codemix/dispatching/issues"
+  },
+  "homepage": "https://github.com/codemix/dispatching",
+  "devDependencies": {
+    "expect.js": "~0.3.1",
+    "should": "~4.0.4",
+    "mocha": "~1.20.1",
+    "istanbul": "~0.2.11"
+  },
+  "dependencies": {}
+}
