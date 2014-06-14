@@ -1,5 +1,6 @@
 # Dispatching
 
+[![Build Status](https://travis-ci.org/codemix/dispatching.svg)](https://travis-ci.org/codemix/dispatching)
 
 URL routing library for node.js and the browser.
 
