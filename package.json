@@ -1,6 +1,6 @@
 {
   "name": "dispatching",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Tiny routing / dispatch library for node and the browser.",
   "main": "lib/index.js",
   "scripts": {

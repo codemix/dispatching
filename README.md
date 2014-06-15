@@ -15,7 +15,14 @@ npm install dispatching
 var dispatcher = new Dispatcher();
 
 dispatcher.add('/<controller>/<id:\\d+>/<action>', function (params) {
-  console.log(params);
+  return params;
+});
+
+dispatcher.add('/<controller>/<id:\\d+>', function (params) {
+  return params;
+});
+
+dispatcher.add('/<controller>', function (params) {
   return params;
 });
 
@@ -23,6 +30,15 @@ dispatcher.dispatch('/users/123/update').should.eql({
   controller: 'users',
   action: 'update',
   id: 123
+});
+
+dispatcher.dispatch('/users/123').should.eql({
+  controller: 'users',
+  id: 123
+});
+
+dispatcher.dispatch('/users').should.eql({
+  controller: 'users'
 });
 
 ```
