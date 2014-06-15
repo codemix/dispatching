@@ -33,6 +33,7 @@ describe('Dispatching', function () {
     var identity = {};
     beforeEach(function () {
       dispatcher = new Dispatching({routes: [
+        ['#<hash>', returnArg],
         ['/', returnArg],
         ['/<controller:\\w+>', returnArg]
       ]});
@@ -49,6 +50,13 @@ describe('Dispatching', function () {
     it('should match empty paths, with full URLs', function () {
       dispatcher.dispatch('https://example.com/').should.eql({});
     });
+
+    it('should match hashes', function () {
+      dispatcher.dispatch('/#hash').should.eql({hash: 'hash'});
+    });
+    it('should match hashes, with full URLs', function () {
+      dispatcher.dispatch('https://example.com/#hash').should.eql({hash: 'hash'});
+    });
     it('should match routes', function () {
       dispatcher.dispatch('/foo/bar').should.equal(identity);
       identity.controller.should.equal('foo');
@@ -56,7 +64,7 @@ describe('Dispatching', function () {
     });
     it('should match routes, with full URLs', function () {
       dispatcher.dispatch('http://example.com/foo/bar').should.equal(identity);
-      dispatcher.dispatch('http://example.com/foo/bar?wat=true#etc').should.equal(identity);
+      dispatcher.dispatch('http://example.com/foo/bar?wat=true').should.equal(identity);
       identity.controller.should.equal('foo');
       identity.action.should.equal('bar');
     });
@@ -72,7 +80,7 @@ describe('Dispatching', function () {
     });
     it('should match the the first rule, with full URLs', function () {
       dispatcher.dispatch('http://example.com/greeting').should.eql({controller: 'greeting'});
-      dispatcher.dispatch('http://example.com/greeting?hello#world').should.eql({controller: 'greeting'});
+      dispatcher.dispatch('http://example.com/greeting?hello').should.eql({controller: 'greeting'});
     });
   });
 
