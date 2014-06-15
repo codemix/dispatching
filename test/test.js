@@ -35,7 +35,14 @@ describe('Dispatching', function () {
       dispatcher = new Dispatching({routes: [
         ['#<hash>', returnArg],
         ['/', returnArg],
-        ['/<controller:\\w+>', returnArg]
+        {
+          pattern: '/<file>',
+          urlSuffix: '.html',
+          fn: function (params) {
+            return params.file;
+          }
+        },
+        ['/<controller:(\\w+)>', returnArg]
       ]});
       dispatcher.add('/<controller>/<action>', function (params) {
         identity.controller = params.controller;
@@ -74,6 +81,14 @@ describe('Dispatching', function () {
     });
     it('should reject urls without matches, with full URLS', function () {
       dispatcher.dispatch('http://example.com/123').should.equal.false;
+    });
+    it('should match url suffices', function () {
+      dispatcher.dispatch('/hello.html').should.equal('hello');
+      dispatcher.dispatch('/hello.txt').should.not.equal('hello');
+    });
+    it('should match url suffices, with full URLs', function () {
+      dispatcher.dispatch('http://example.com/hello.html').should.equal('hello');
+      dispatcher.dispatch('http://example.com/hello.html?wat=foo').should.equal('hello');;
     });
     it('should match the the first rule', function () {
       dispatcher.dispatch('/greeting').should.eql({controller: 'greeting'});
